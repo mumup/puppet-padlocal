@@ -60,6 +60,9 @@ export const roomParser: MessageParser = async(padLocalMessage: PadLocal.Message
   if (ret.roomId) {
     context.isRoomMessage = true;
 
+    //  过滤win pc群聊中的@的空id
+    padLocalMessage.atList = padLocalMessage.atList.filter(Boolean);
+
     let mentionIdList: string[];
     if (padLocalMessage.atList.length === 1 && padLocalMessage.atList[0] === "announcement@all") {
       const roomPayload = await context.puppet.roomPayload(ret.roomId);

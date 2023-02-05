@@ -194,7 +194,7 @@ describe("message", () => {
     const message1 = await sendToContact(payload, expectedMessageType);
     const message2 = await sendToRoom(payload, expectedMessageType);
 
-    return [message1, message2];
+    return [ message1, message2 ];
   };
 
   const recallMessages = async(messageList: Message[]) => {

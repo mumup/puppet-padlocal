@@ -1397,7 +1397,7 @@ class PuppetPadlocal extends PUPPET.Puppet {
           if (removedMemberIdList.length) {
             removedMemberIdList.forEach((removeeId) => {
               const roomLeave: PUPPET.payloads.EventRoomLeave = {
-                removeeIdList: [removeeId],
+                removeeIdList: [ removeeId ],
                 removerId: removeeId,
                 roomId: contact.username,
                 timestamp: Math.floor(Date.now() / 1000),

@@ -56,7 +56,7 @@ export default async(puppet: PUPPET.Puppet, message: PadLocal.Message.AsObject):
    */
   const youInviteOther = createSysmsgTemplateRunner<PUPPET.payloads.EventRoomJoin>(
     sysmsgTemplatePayload,
-    [...YOU_INVITE_OTHER_REGEX_LIST, ...OTHER_JOIN_VIA_YOUR_QRCODE_REGEX_LIST],
+    [ ...YOU_INVITE_OTHER_REGEX_LIST, ...OTHER_JOIN_VIA_YOUR_QRCODE_REGEX_LIST ],
     async(templateLinkList) => {
       // the first item MUST be others profile link
       const inviteeList = templateLinkList[0]!.payload as SysmsgTemplateLinkProfile;
@@ -82,7 +82,7 @@ export default async(puppet: PUPPET.Puppet, message: PadLocal.Message.AsObject):
       const inviter = templateLinkList[0]!.payload as SysmsgTemplateLinkProfile;
 
       return {
-        inviteeIdList: [puppet.currentUserId],
+        inviteeIdList: [ puppet.currentUserId ],
         inviterId: inviter[0]!.userName,
         roomId,
         timestamp,
@@ -96,7 +96,7 @@ export default async(puppet: PUPPET.Puppet, message: PadLocal.Message.AsObject):
    */
   const otherInviteOther = createSysmsgTemplateRunner<PUPPET.payloads.EventRoomJoin>(
     sysmsgTemplatePayload,
-    [...OTHER_INVITE_YOU_AND_OTHER_REGEX_LIST, ...OTHER_INVITE_OTHER_REGEX_LIST],
+    [ ...OTHER_INVITE_YOU_AND_OTHER_REGEX_LIST, ...OTHER_INVITE_OTHER_REGEX_LIST ],
     async(templateLinkList, matchedRegexIndex) => {
       // the first item is invitor
       const inviter = templateLinkList[0]!.payload as SysmsgTemplateLinkProfile;
@@ -143,7 +143,7 @@ export default async(puppet: PUPPET.Puppet, message: PadLocal.Message.AsObject):
       } as PUPPET.payloads.EventRoomJoin;
     });
 
-  const ret = await executeRunners([youInviteOther, otherInviteYou, otherInviteOther, otherJoinViaQrCode]);
+  const ret = await executeRunners([ youInviteOther, otherInviteYou, otherInviteOther, otherJoinViaQrCode ]);
   if (ret) {
     ret.inviteeIdList.forEach((inviteeId) => {
       removeRoomLeaveDebounce(ret!.roomId, inviteeId);

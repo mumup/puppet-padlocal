@@ -102,7 +102,7 @@ export default async(puppet: PUPPET.Puppet, message: PadLocal.Message.AsObject):
       const removerId = (await puppet.roomMemberSearch(roomId, removerName))[0]!;
 
       return {
-        removeeIdList: [puppet.currentUserId],
+        removeeIdList: [ puppet.currentUserId ],
         removerId,
         roomId,
         timestamp: message.createtime,
@@ -112,7 +112,7 @@ export default async(puppet: PUPPET.Puppet, message: PadLocal.Message.AsObject):
     return null;
   };
 
-  const ret = await executeRunners<PUPPET.payloads.EventRoomLeave>([youRemoveOther, otherRemoveYou]);
+  const ret = await executeRunners<PUPPET.payloads.EventRoomLeave>([ youRemoveOther, otherRemoveYou ]);
   if (ret) {
     ret.removeeIdList.forEach((leaverId) => {
       roomLeaveAddDebounce(roomId, leaverId);

@@ -71,7 +71,7 @@ export default async(puppet: PUPPET.Puppet, message: PadLocal.Message.AsObject):
       });
   };
 
-  const topicChange = await executeRunners<TopicChange>([youChangeTopic, otherChangeTopic]);
+  const topicChange = await executeRunners<TopicChange>([ youChangeTopic, otherChangeTopic ]);
   if (topicChange) {
     const room = await puppet.roomPayload(roomId);
     const oldTopic = room.topic;
